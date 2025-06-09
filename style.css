@@ -5,6 +5,8 @@ body, html {
   height: 100%;
   font-family: Arial, sans-serif;
   background-color: #f4f4f4;
+  touch-action: manipulation; /* 터치 확대 방지 */
+  overscroll-behavior: contain; /* 스크롤 넘침 제어 */
 }
 
 /* 상단 고정 헤더 */
@@ -18,9 +20,27 @@ body, html {
   padding: 15px 20px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start; /* 왼쪽 정렬 */
   align-items: center;
+  gap: 15px;
   z-index: 1000;
+}
+
+/* 메뉴 버튼 */
+.menu-btn {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 14px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.3s;
+}
+
+.menu-btn:hover {
+  background-color: #2980b9;
 }
 
 /* 제목과 포인트 */
@@ -28,10 +48,11 @@ body, html {
   font-size: 2rem;
   color: #333;
   margin: 0;
+  flex-grow: 1; /* 제목이 좌우 공간 밀어내기 */
 }
 
 #points {
-  font-size: 1.5rem;
+  font-size: 1.2rem; /* 글씨 작게 */
   color: #555;
 }
 
@@ -74,6 +95,7 @@ button {
   color: white;
   font-weight: bold;
   transition: background-color 0.3s;
+  user-select: none;
 }
 
 /* 공부 완료 버튼 */
@@ -113,7 +135,7 @@ button {
 }
 
 #class-complete-btn:hover {
-  background-color: #2ecc71;
+  background-color: #27ae60;
 }
 
 /* 수업 -1 버튼 */
@@ -127,9 +149,73 @@ button {
 }
 
 #class-minus-btn:hover {
-  background-color: #e74c3c;
+  background-color: #c0392b;
 }
-html, body {
-  touch-action: manipulation; /* 터치 확대 방지 */
-  overscroll-behavior: contain; /* 스크롤 넘침 제어 */
+
+/* 메뉴 모달 (숨김 기본) */
+.hidden {
+  display: none;
+}
+
+#menu-modal {
+  position: fixed;
+  top: 70px; /* 헤더 바로 아래 */
+  left: 0;
+  width: 100%;
+  max-width: 400px;
+  height: calc(100vh - 70px);
+  background-color: #fff;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  z-index: 1100;
+  padding: 20px;
+  overflow-y: auto;
+  border-radius: 0 0 10px 10px;
+}
+
+/* 메뉴 내용 */
+.menu-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* 메뉴 리스트 */
+.menu-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu-item {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  background-color: #3498db;
+  color: white;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  user-select: none;
+}
+
+.menu-item:hover {
+  background-color: #2980b9;
+}
+
+/* 닫기 버튼 */
+#close-menu {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  font-size: 1rem;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.3s;
+}
+
+#close-menu:hover {
+  background-color: #c0392b;
 }
