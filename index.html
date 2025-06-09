@@ -3,40 +3,39 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>공부 포인트 시스템</title>
+  <title>Study App</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>공부 포인트 시스템</h1>
-  <p id="points">현재 포인트: 0</p>
-  <button id="studyBtn">공부 완료</button>
-  <button id="minusBtn">-1</button>
-<script>
-let points = localStorage.getItem('points');
-points = points ? Number(points) : 0;
+  <!-- 상단 고정 헤더 -->
+  <header class="header">
+    <h1 id="study-title">Study</h1>
+    <span id="points">0 Points</span>
+  </header>
 
-const pointsDisplay = document.getElementById("points");
-const studyBtn = document.getElementById("studyBtn");
-const minusBtn = document.getElementById("minusBtn");
+  <!-- 스크롤 가능한 메인 영역 -->
+  <main class="main">
 
-pointsDisplay.innerText = `현재 포인트: ${points}`;
+    <!-- 공부 영역 -->
+    <section>
+      <h2 class="section-title">공부</h2>
+      <div class="study-box">
+        <button id="complete-btn">공부 완료</button>
+        <button id="study-btn">-1</button>
+      </div>
+    </section>
 
-studyBtn.addEventListener("click", () => {
-  points++;
-  pointsDisplay.innerText = `현재 포인트: ${points}`;
-  localStorage.setItem('points', points);
-  alert("포인트가 적립되었습니다!");
-});
+    <!-- 수업 영역 -->
+    <section>
+      <h2 class="section-title">수업</h2>
+      <div class="study-box">
+        <button id="class-complete-btn">수업 완료</button>
+        <button id="class-minus-btn">-1</button>
+      </div>
+    </section>
 
-minusBtn.addEventListener("click", () => {
-  if (points > 0) {
-    points--;
-    pointsDisplay.innerText = `현재 포인트: ${points}`;
-    localStorage.setItem('points', points);
-  } else {
-    alert("포인트가 0 이하로 내려갈 수 없습니다.");
-  }
-});
-</script>
+  </main>
+
+  <script src="script.js"></script>
 </body>
 </html>
