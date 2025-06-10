@@ -1,4 +1,6 @@
 let points = Number(localStorage.getItem('points')) || 0;
+let currentLevel = '';  // 현재 레벨 상태 기억용
+let levelHistory = JSON.parse(localStorage.getItem('levelHistory')) || []; // 기록 불러오기
 
 function updatePoints() {
   document.getElementById('points').textContent = `${points} Points`;
@@ -13,6 +15,7 @@ const menuBtn = document.getElementById('menu-btn');
 const menuModal = document.getElementById('menu-modal');
 const closeMenuBtn = document.getElementById('close-menu');
 const resetPointsBtn = document.getElementById('reset-points-btn');
+const darkModeBtn = document.getElementById('toggle-dark-mode');
 
 // 공부 완료 버튼
 completeBtn.addEventListener('click', () => {
@@ -79,3 +82,48 @@ menuItems.forEach((btn, index) => {
 });
 
 updatePoints();
+
+// 로컬스토리지에서 모드 상태 불러오기
+let isDarkMode = localStorage.getItem('darkMode') === 'true';
+
+function updateDarkModeUI() {
+  if (isDarkMode) {
+    document.body.classList.add('dark-mode');
+    darkModeBtn.textContent = '라이트 모드 켜기';
+  } else {
+    document.body.classList.remove('dark-mode');
+    darkModeBtn.textContent = '다크 모드 켜기';
+  }
+  localStorage.setItem('darkMode', isDarkMode);
+}
+
+// 버튼 클릭 시 토글
+darkModeBtn.addEventListener('click', () => {
+  isDarkMode = !isDarkMode;
+  updateDarkModeUI();
+});
+
+// 초기 로드 시 상태 반영
+updateDarkModeUI();
+
+//-------------------------------레벨-------------------------
+function updateLevel() {
+  const levelText = document.getElementById('level');
+  if (points >= 600) {
+    levelText.textContent = '레벨: 다이야';
+  } else if (points >= 300) {
+    levelText.textContent = '레벨: 플래티넘';
+  } else if (points >= 150) {
+    levelText.textContent = '레벨: 골드';
+  } else if (points >= 75) {
+    levelText.textContent = '레벨: 실버';
+  } else {
+    levelText.textContent = '레벨: 브론즈';
+  }
+}
+
+function updatePoints() {
+  document.getElementById('points').textContent = `${points} Points`;
+  localStorage.setItem('points', points);
+  updateLevel(); // 레벨도 같이 업데이트!
+}

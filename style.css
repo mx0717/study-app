@@ -247,3 +247,52 @@ button {
 .menu-item:hover {
   background: rgba(255, 255, 255, 0.3);        /* 호버 시 조금 더 진한 반투명 */
 }
+
+html, body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden; /* 좌우 스크롤 방지 */
+}
+
+/* 다크 모드 기본 스타일--------------------------------------------------------- */
+body.dark-mode {
+  background-color: #121212;
+  color: #eee;
+}
+
+body.dark-mode .header {
+  background-color: #1f1f1f;
+  box-shadow: none;
+  color: #eee;
+}
+
+body.dark-mode .main {
+  background-color: #222;
+  color: #eee;
+}
+
+/* 버튼 유리질감 유지하며 다크모드에 맞게 색상 변경 */
+body.dark-mode button {
+  background-color: rgba(255 255 255 / 0.1);
+  color: #eee;
+  border: 1px solid rgba(255 255 255 / 0.3);
+}
+
+body.dark-mode .menu-content {
+  background-color: rgba(0 0 0 / 0.5);
+  backdrop-filter: blur(10px);
+  color: #eee;
+}
+body.dark-mode .study-box {
+  background-color: rgba(255 255 255 / 0.1); /* 반투명 밝은 색으로 변경 */
+  border: 1px solid rgba(255 255 255 / 0.2);
+  backdrop-filter: blur(6px);
+}
+
+  /*부가설명*/
+
+.sub-info {
+  font-size: 0.8rem;
+  color: #888;
+  margin-left: 8px;
+}

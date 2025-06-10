@@ -12,28 +12,33 @@
     <button id="menu-btn" class="menu-btn">☰</button>
     <h1 id="study-title">Study</h1>
     <span id="points">0 Points</span>
+    <span id="level">레벨:</span>
   </header>
 
   <!-- 스크롤 가능한 메인 영역 -->
   <main class="main">
-    <!-- 공부 영역 -->
-    <section>
-      <h2 class="section-title">공부</h2>
-      <div class="study-box">
-        <button id="complete-btn">완료</button>
-        <button id="study-btn">-</button>
-      </div>
-    </section>
+<!-- 공부 영역 -->
+<section>
+  <h2 class="section-title">
+    공부 <span class="sub-info">1시간 = 1버튼</span>
+  </h2>
+  <div class="study-box">
+    <button id="complete-btn">완료</button>
+    <button id="study-btn">-</button>
+  </div>
+</section>
 
-    <!-- 수업 영역 -->
-    <section>
-      <h2 class="section-title">수업</h2>
-      <div class="study-box">
-        <button id="class-complete-btn">완료</button>
-        <button id="class-minus-btn">-</button>
-      </div>
-    </section>
-  </main>
+<!-- 수업 영역 -->
+<section>
+  <h2 class="section-title">
+    수업 <span class="sub-info">시험과목 수업시간 집중 = 1버튼</span>
+  </h2>
+  <div class="study-box">
+    <button id="class-complete-btn">완료</button>
+    <button id="class-minus-btn">-</button>
+  </div>
+</section>
+
 
   <!-- 메뉴 -->
   <div id="menu-modal" class="hidden">
@@ -42,6 +47,7 @@
       <ul class="menu-list">
         <li><button class="menu-item">앱 정보</button></li>
         <li><button id="reset-points-btn" class="menu-item">포인트 초기화</button></li>
+        <li><button id="toggle-dark-mode" class="menu-item">다크 모드 켜기</button></li>
       </ul>
     </div>
   </div>
