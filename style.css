@@ -28,8 +28,8 @@ body, html {
 
 /* 메뉴 버튼 */
 .menu-btn {
-  background-color: #3498db;
-  color: white;
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
   border: none;
   border-radius: 5px;
   padding: 10px 14px;
@@ -40,7 +40,7 @@ body, html {
 }
 
 .menu-btn:hover {
-  background-color: #2980b9;
+  background-color: #2e2a2a;
 }
 
 /* 제목과 포인트 */
@@ -52,7 +52,7 @@ body, html {
 }
 
 #points {
-  font-size: 1.2rem; /* 글씨 작게 */
+  font-size: 1rem; /* 글씨 작게 */
   color: #555;
 }
 
@@ -98,78 +98,119 @@ button {
   user-select: none;
 }
 
-/* 공부 완료 버튼 */
+/* 공부완료 버튼 (#complete-btn) 유리 질감 */
 #complete-btn {
-  background-color: #2ecc71;
+  background: #1df1164d;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid #1df1164d;
+  color: rgb(255, 255, 255);
   padding: 14px 30px;
   font-size: 1.2rem;
   flex-grow: 1;
   margin-right: 15px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s, border-color 0.3s;
 }
 
 #complete-btn:hover {
-  background-color: #27ae60;
+  background: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.5);
 }
 
-/* 공부 -1 버튼 */
+
+/* 공부 -1 버튼 (#study-btn) 유리 질감 */
 #study-btn {
-  background-color: #e74c3c;
+  background: #e60d0d33;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid #e60d0d33;
+  color: rgb(255, 255, 255);
   padding: 8px 14px;
   font-size: 1rem;
   width: 50px;
   height: 40px;
   flex-shrink: 0;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s, border-color 0.3s;
 }
 
 #study-btn:hover {
-  background-color: #c0392b;
+  background: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.5);
 }
 
-/* 수업 완료 버튼 */
+/* 수업완료 버튼 (#class-complete-btn) 유리 질감 */
 #class-complete-btn {
-  background-color: #2ecc71;
+  background: #1df1164d;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid #1df1164d;
+  color: rgb(255, 255, 255);
   padding: 14px 30px;
   font-size: 1.2rem;
   flex-grow: 1;
   margin-right: 15px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s, border-color 0.3s;
 }
 
 #class-complete-btn:hover {
-  background-color: #27ae60;
+  background: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.5);
 }
 
-/* 수업 -1 버튼 */
+/* 수업 -1 버튼 (#class-minus-btn) 유리 질감 */
 #class-minus-btn {
-  background-color: #e74c3c;
+  background: #e60d0d33;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid #e60d0d33;
+  color: white;
   padding: 8px 14px;
   font-size: 1rem;
   width: 50px;
   height: 40px;
   flex-shrink: 0;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s, border-color 0.3s;
 }
 
 #class-minus-btn:hover {
-  background-color: #c0392b;
+  background: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.5);
 }
 
-/* 메뉴 모달 (숨김 기본) */
-.hidden {
-  display: none;
-}
 
 #menu-modal {
   position: fixed;
-  top: 70px; /* 헤더 바로 아래 */
+  top: 70px;
   left: 0;
   width: 100%;
   max-width: 400px;
   height: calc(100vh - 70px);
-  background-color: #fff;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  background-color: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   z-index: 1100;
   padding: 20px;
   overflow-y: auto;
   border-radius: 0 0 10px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+
+  /* 슬라이드 숨김 상태 */
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  /* display: block;  <-- 없어야 합니다 */
+}
+
+#menu-modal.active {
+  transform: translateX(0);
 }
 
 /* 메뉴 내용 */
@@ -183,39 +224,26 @@ button {
 .menu-list {
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin: 2;
 }
 
 .menu-item {
   width: 100%;
   padding: 10px;
   font-size: 1rem;
-  background-color: #3498db;
-  color: white;
-  border-radius: 6px;
-  border: none;
+  background: rgba(255, 255, 255, 0.2);       /* 반투명 배경 */
+  color: rgb(0, 0, 0);                        /* 글자색 검정 유지 */
+  border-radius: 10px;                        /* 둥글게 */
+  border: 1px solid rgba(255, 255, 255, 0.3); /* 흐린 흰색 테두리 */
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s, backdrop-filter 0.3s;
   user-select: none;
+  margin-bottom: 12px;
+  backdrop-filter: blur(10px);                 /* 배경 흐림 */
+  -webkit-backdrop-filter: blur(10px);         /* 사파리용 */
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);  /* 은은한 그림자 */
 }
 
 .menu-item:hover {
-  background-color: #2980b9;
-}
-
-/* 닫기 버튼 */
-#close-menu {
-  background-color: #e74c3c;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 15px;
-  font-size: 1rem;
-  cursor: pointer;
-  user-select: none;
-  transition: background-color 0.3s;
-}
-
-#close-menu:hover {
-  background-color: #c0392b;
+  background: rgba(255, 255, 255, 0.3);        /* 호버 시 조금 더 진한 반투명 */
 }
