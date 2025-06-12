@@ -40,7 +40,7 @@
 </section>
 
 
-  <!-- 메뉴 -->
+    <!-- 메뉴 -->
   <div id="menu-modal" class="hidden">
     <div class="menu-content">
       <h2>메뉴</h2>
@@ -48,11 +48,21 @@
         <li><button class="menu-item">앱 정보</button></li>
         <li><button id="reset-points-btn" class="menu-item">포인트 초기화</button></li>
         <li><button id="toggle-dark-mode" class="menu-item">다크 모드 켜기</button></li>
+        <li><button id="open-record-btn" class="menu-item">기록</button></li>
       </ul>
     </div>
   </div>
 
+<!-- 기록 패널 -->
+<div id="record-panel">
+  <h2>포인트 기록</h2>
+  <canvas id="record-chart" width="350" height="300"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
   <script src="script.js"></script>
 </body>
 </html>
+
 

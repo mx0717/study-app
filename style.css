@@ -296,3 +296,52 @@ body.dark-mode .study-box {
   color: #888;
   margin-left: 8px;
 }
+
+/* 기록 슬라이드 패널 */
+#record-panel {
+  position: fixed;
+  top: 70px;
+  left: -100%; /* 처음에는 왼쪽 바깥에 숨김 */
+  width: 100%;
+  max-width: 400px;
+  height: calc(100vh - 70px);
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 1200;
+  padding: 20px;
+  box-shadow: 4px 0 10px rgba(0, 0, 0, 0.2);
+  transition: left 0.3s ease;
+  overflow-y: auto;
+}
+
+/* 기록 패널이 보일 때 */
+#record-panel.active {
+  left: 0;
+}
+
+body.dark-mode #record-panel {
+  background: rgba(34, 34, 34, 0.9);
+  color: #eee;
+}
+
+#record-panel {
+  position: fixed;
+  top: 70px;
+  left: 0;
+  width: 100%;
+  max-width: 400px;
+  height: calc(100vh - 70px);
+  background-color: white;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  padding: 20px;
+  overflow-y: auto;
+  border-radius: 0 0 10px 10px;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  z-index: 1200;
+}
+
+#record-panel.active {
+  transform: translateX(0);
+}
