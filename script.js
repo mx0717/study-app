@@ -14,16 +14,18 @@ const openRecordBtn = document.getElementById('open-record-btn');
 const recordPanel = document.getElementById('record-panel');
 const pointsDisplay = document.getElementById('points');
 const levelDisplay = document.getElementById('level');
+const appInfoBtn = document.getElementById('app-info-btn');
+
 
 let isDarkMode = localStorage.getItem('darkMode') === 'true';
 
 // 포인트, 레벨 업데이트 함수
 function updateLevel() {
-  if (points >= 600) levelDisplay.textContent = '레벨: 다이야';
-  else if (points >= 300) levelDisplay.textContent = '레벨: 플래티넘';
-  else if (points >= 150) levelDisplay.textContent = '레벨: 골드';
-  else if (points >= 75) levelDisplay.textContent = '레벨: 실버';
-  else levelDisplay.textContent = '레벨: 브론즈';
+  if (points >= 600) levelDisplay.textContent = '레벨: 🌌';
+  else if (points >= 300) levelDisplay.textContent = '레벨: 🌠';
+  else if (points >= 150) levelDisplay.textContent = '레벨: 🌟';
+  else if (points >= 75) levelDisplay.textContent = '레벨: ⭐';
+  else levelDisplay.textContent = '레벨: 💧';
 }
 
 function updatePoints() {
@@ -142,6 +144,12 @@ menuBtn.addEventListener('click', () => {
   menuModal.classList.toggle('active');
 });
 
+// 메뉴 내 앱 정보 버튼
+appInfoBtn.addEventListener('click', () => {
+  alert('📱 Study App v0.4\n만든이: mx0');
+  menuModal.classList.remove('active');
+});
+
 // 메뉴 내 초기화 버튼
 resetPointsBtn.addEventListener('click', () => {
   if (confirm('정말 초기화 하시겠습니까?')) {
@@ -153,6 +161,7 @@ resetPointsBtn.addEventListener('click', () => {
     alert('포인트 및 기록이 초기화되었습니다.');
   }
 });
+
 
 // 다크 모드 토글
 function updateDarkModeUI() {
@@ -190,3 +199,108 @@ document.addEventListener('click', (e) => {
 // 초기화면 렌더링
 updatePoints();
 renderChart();
+
+// 출석 체크 관련 변수
+let attendanceData = JSON.parse(localStorage.getItem('attendanceData')) || {
+  lastDate: null,
+  streak: 0,
+  markedDays: []
+};
+
+// 출석 버튼과 창 열기
+const attendanceBtn = document.getElementById('attendance-btn');
+const attendancePanel = document.getElementById('attendance-panel');
+const closeAttendance = document.getElementById('close-attendance');
+const calendar = document.getElementById('calendar');
+const streakInfo = document.getElementById('streak-info');
+
+// 패널 열기
+attendanceBtn.addEventListener('click', () => {
+  attendancePanel.classList.add('active');
+  renderCalendar();
+  updateStreakInfo();
+});
+
+// 패널 닫기
+closeAttendance.addEventListener('click', () => {
+  attendancePanel.classList.remove('active');
+});
+
+// 오늘 날짜를 'YYYY-MM-DD' 형식으로 반환
+function getTodayKey() {
+  return new Date().toISOString().split('T')[0];
+}
+
+// 출석 체크 처리
+function checkAttendance() {
+  const today = getTodayKey();
+  if (attendanceData.markedDays.includes(today)) {
+    alert('오늘은 이미 출석했습니다!');
+    return;
+  }
+
+  attendanceData.markedDays.push(today);
+
+  // 연속 출석 계산
+  const yesterday = new Date();
+  yesterday.setDate(yesterday.getDate() - 1);
+  const yesterdayKey = yesterday.toISOString().split('T')[0];
+
+  if (attendanceData.lastDate === yesterdayKey) {
+    attendanceData.streak += 1;
+  } else {
+    attendanceData.streak = 1;
+  }
+
+  attendanceData.lastDate = today;
+  localStorage.setItem('attendanceData', JSON.stringify(attendanceData));
+
+  // 포인트 2점 추가
+  points += 2;
+  updatePoints();
+  saveStudyRecord(2); // 기록 저장
+  renderChart();
+
+  renderCalendar();
+  updateStreakInfo();
+
+  alert('출석 완료! +2포인트');
+}
+
+// 달력 렌더링
+function renderCalendar() {
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = today.getMonth();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+  let html = `<table style="width:100%; border-collapse: collapse; text-align:center;">`;
+  html += `<tr><th colspan="7">${year}년 ${month + 1}월</th></tr>`;
+  html += `<tr><th>일</th><th>월</th><th>화</th><th>수</th><th>목</th><th>금</th><th>토</th></tr>`;
+
+  const firstDay = new Date(year, month, 1).getDay();
+  let day = 1;
+  html += `<tr>`;
+
+  for (let i = 0; i < firstDay; i++) {
+    html += `<td></td>`;
+  }
+
+  while (day <= daysInMonth) {
+    const current = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+    const isToday = current === getTodayKey();
+    const isMarked = attendanceData.markedDays.includes(current);
+    html += `<td style="padding:5px; cursor:pointer; background:${isMarked ? '#a3e6a3' : isToday ? '#ddd' : ''}" onclick="checkAttendance()">${day}</td>`;
+
+    if ((day + firstDay) % 7 === 0) html += `</tr><tr>`;
+    day++;
+  }
+
+  html += `</tr></table>`;
+  calendar.innerHTML = html;
+}
+
+// 연속 출석 정보 업데이트
+function updateStreakInfo() {
+  streakInfo.textContent = `🔥 연속 출석: ${attendanceData.streak}일`;
+}

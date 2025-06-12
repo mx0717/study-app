@@ -45,7 +45,7 @@
     <div class="menu-content">
       <h2>메뉴</h2>
       <ul class="menu-list">
-        <li><button class="menu-item">앱 정보</button></li>
+        <li><button id="app-info-btn" class="menu-item">앱 정보</button></li>
         <li><button id="reset-points-btn" class="menu-item">포인트 초기화</button></li>
         <li><button id="toggle-dark-mode" class="menu-item">다크 모드 켜기</button></li>
         <li><button id="open-record-btn" class="menu-item">기록</button></li>
@@ -57,6 +57,19 @@
 <div id="record-panel">
   <h2>포인트 기록</h2>
   <canvas id="record-chart" width="350" height="300"></canvas>
+</div>
+
+<!-- 출석 버튼 (공부완료 버튼 위에 배치) -->
+<div style="display: flex; justify-content: center; margin-bottom: 10px;">
+  <button id="attendance-btn" class="menu-btn">출석 체크</button>
+</div>
+
+<!-- 출석 창 (슬라이드 창) -->
+<div id="attendance-panel">
+  <h2>📅 출석 체크</h2>
+  <div id="calendar"></div>
+  <p id="streak-info" style="margin-top: 10px;"></p>
+  <button id="close-attendance" class="menu-btn">닫기</button>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
